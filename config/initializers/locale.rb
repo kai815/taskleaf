@@ -1,0 +1,1 @@
+Rails.application.config.i18.default_locale = :ja
