@@ -7,6 +7,7 @@ table.table.table-hover
     tr
       th= Task.human_attribute_name(:name)
       th= Task.human_attribute_name(:created_at)
+      th
   tbody
     - @tasks.each do |task|
       tr
@@ -14,3 +15,5 @@ table.table.table-hover
         / URLヘルパーメソッドを使って以下のようにもかける
         / td= link_to task.name, task_path(task)
         td= task.created_at
+        td
+          = link_to "編集", edit_task_path(task), class: 'btn btn-primary mr-3' 
