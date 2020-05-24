@@ -48,6 +48,7 @@ describe 'タスク管理機能', type: :system do
 
   describe '新規作成機能' do
     let(:login_user) { user_a }
+    let(:task_name) {'新規作成のテストを書く'} #デフォルトとして
 
     before do
       visit new_task_path
@@ -56,15 +57,13 @@ describe 'タスク管理機能', type: :system do
     end
 
     context '新規作成画面で名称を入力したとき' do
-      let(:task_name) {'新規作成のテストを書く'}
-
       it '正常に登録される' do
         expect(page).to have_selector '.alert-success', text: '新規作成のテストを書く'
       end
     end
 
     context '新規作成画面で名称を入力しなかったとき' do
-      let(:task_name) { '' }
+      let(:task_name) { '' } #上書きもできる
 
       it 'エラーとなる' do
         within '#error_explanation' do
