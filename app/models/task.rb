@@ -6,7 +6,7 @@ class Task < ApplicationRecord
 
   belongs_to :user
 
-  scope :recent, -> { order(created_at: :desc)}
+  # scope :recent, -> { order(created_at: :desc)}
 
   # 検索に使用していいカラムの制限
   def self.ransackable_attributes(auth_object = nil)
@@ -16,7 +16,7 @@ class Task < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     []
   end
-  
+
   private
 
   def validates_name_not_including_comma
