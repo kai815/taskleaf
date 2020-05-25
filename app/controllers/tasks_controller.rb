@@ -18,6 +18,8 @@ class TasksController < ApplicationController
     # 下記のようにもかける
     # @task = Task.new(task_params.merge(user_id: current_user.id))
     if @task.save
+      # ログの出力
+      # logger.debug "task: #{@task.attributes.inspect}"
       redirect_to @task, notice:"タスク「#{@task.name}」を登録しました。"
     else
       render :new
