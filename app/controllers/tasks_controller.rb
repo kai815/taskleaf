@@ -1,9 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_task ,only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
-    # 下記のようにもかける
-    # @tasks = Task.where(user_id: current_user.id)
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true)
   end
 
   def show
@@ -31,6 +30,8 @@ class TasksController < ApplicationController
     if @task.save
       # ログの出力
       # logger.debug "task: #{@task.attributes.inspect}"
+      # メールを送る
+      TaskMailer.creation_email(@task).deliver_now
       redirect_to @task, notice:"タスク「#{@task.name}」を登録しました。"
     else
       render :new
