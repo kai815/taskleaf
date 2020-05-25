@@ -13,10 +13,21 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  def confirm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
+  end
+
   def create
     @task = current_user.tasks.new(task_params)
     # 下記のようにもかける
     # @task = Task.new(task_params.merge(user_id: current_user.id))
+
+    #確認画面で戻るボタンが押されたかどうかのチェック
+    if params[:back].present?
+      render :new
+      return
+    end
     if @task.save
       # ログの出力
       # logger.debug "task: #{@task.attributes.inspect}"
