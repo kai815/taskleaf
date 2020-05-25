@@ -1,9 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_task ,only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
-    # 下記のようにもかける
-    # @tasks = Task.where(user_id: current_user.id)
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).recent
   end
 
   def show
