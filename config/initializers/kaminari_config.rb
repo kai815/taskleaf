@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Kaminari.configure do |config|
-  # git ここでページの設定ができる
+  # ここでページネーションの設定ができる
   # config.default_per_page = 25
   # config.max_per_page = nil
   # config.window = 4
