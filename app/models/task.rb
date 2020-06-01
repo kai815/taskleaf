@@ -4,6 +4,8 @@ class Task < ApplicationRecord
   validates :name, presence: true
   validates :name, length: {maximum: 30}
   validate :validates_name_not_including_comma
+  # モデルに下記のように書くことで1ページの件数も設定可能
+  paginates_per 50
 
   belongs_to :user
 
